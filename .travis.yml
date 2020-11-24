@@ -5,7 +5,7 @@ before_install:
   - docker build -t vision333/react-test -f ./client/dockerfile.dev ./client
 
 scripts:
-  - docker run vision333/react-test npm test -- --coverage
+  -  docker run -e CI=true vision333/react-test npm test 
 
 after_success:
   - docker build -t vision333/react-test/multi-client ./client
