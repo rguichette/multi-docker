@@ -1,0 +1,22 @@
+sudo: required
+services:
+  - docker
+before_install: 
+  - docker build -t vision333/react-test -f ./client/dockerfile.dev ./client
+
+scripts:
+  - docker run vision333/react-test npm test -- --coverage
+
+after_success:
+  - docker build -t vision333/react-test/multi-client ./client
+  - docker build -t vision333/react-test/multi-nginx  ./nginx
+  - docker build -t vision333/react-test/multi-server ./server
+  - docker build -t vision333/react-test/multi-worker ./worker 
+
+#login to docker cli 
+- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+#Take thos images and push them to docker hub 
+- docker push -t vision333/multi-client
+- docker push -t vision333/multi-nginx
+- docker push -t vision333/multi-server
+- docker push -t vision333/multi-worker
