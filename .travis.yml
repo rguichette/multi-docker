@@ -1,11 +1,12 @@
-language: generic 
 sudo: required
+language: generic 
+
 services:
   - docker
 before_install: 
   - docker build -t vision333/react-test -f ./client/Dockerfile.dev ./client
 
-scripts:
+script:
   -  docker run -e CI=true vision333/react-test npm test 
 
 after_success:
