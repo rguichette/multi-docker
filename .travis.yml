@@ -16,9 +16,9 @@ after_success:
   - docker build -t vision333/multi-worker ./worker 
 
 #login to docker cli 
-- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 #Take thos images and push them to docker hub 
-- docker push vision333/multi-client
-- docker push vision333/multi-nginx
-- docker push vision333/multi-server
-- docker push vision333/multi-worker
+  - docker push vision333/multi-client
+  - docker push vision333/multi-nginx
+  - docker push vision333/multi-server
+  - docker push vision333/multi-worker
