@@ -1,0 +1,41 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "contaienrDefinitions": [
+        {
+        "name": "client",
+        "image": "vision333/multi-client",
+        "hostname": "client",
+        "essential": false
+        },
+
+        {
+            "name": "server",
+            "image": "vision333/multi-client",
+            "hostname": "api",
+            "essential": false
+        },
+       
+        {
+            "name": "worker",
+            "image": "vision333/multi-client",
+            "hostname": "worker",
+            "essential": false
+        },
+
+        {
+            "name": "nginx",
+            "image": "vision333/multi-client",
+            "essential": true,
+            "portMappings": [
+                {
+                "hostPort": 80,
+                 "containerPort": 80}
+            ],
+
+            "links": ["client", "server"]
+        }
+    
+        
+    ]
+}
+
